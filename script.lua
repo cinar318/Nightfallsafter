@@ -78,7 +78,7 @@ button.MouseButton1Click:Connect(function()
 	local dragBox = Instance.new("TextButton")
 	dragBox.Name = "DragBox"
 	dragBox.Parent = mainFrame
-	dragBox.Size = UDim2.new(0,35,0,60) -- Volle Höhe des GUIs
+	dragBox.Size = UDim2.new(0,35,0,40) -- Volle Höhe des GUIs
 	dragBox.Position = UDim2.new(0,0,0,0)
 	dragBox.Text = "" -- Leer lassen
 	dragBox.BackgroundColor3 = Color3.fromRGB(50, 50, 50) 
@@ -121,25 +121,25 @@ button.MouseButton1Click:Connect(function()
 
 	local moveBox1 = Instance.new("TextBox")
 	moveBox1.Parent = mainFrame
-	moveBox1.Size = UDim2.new(0,35,0,30)
+	moveBox1.Size = UDim2.new(0,35,0,20)
 	moveBox1.Position = UDim2.new(0,35,0,0) -- Um 35 nach rechts verschoben wegen DragBox
 	moveBox1.Text = "5"
 
 	local glideBtn1 = Instance.new("TextButton")
 	glideBtn1.Parent = mainFrame
-	glideBtn1.Size = UDim2.new(0,75,0,30)
+	glideBtn1.Size = UDim2.new(0,75,0,20)
 	glideBtn1.Position = UDim2.new(0,70,0,0) -- Position angepasst
 	glideBtn1.Text = "Glide1"
 
 	local moveBox2 = Instance.new("TextBox")
 	moveBox2.Parent = mainFrame
-	moveBox2.Size = UDim2.new(0,35,0,30)
+	moveBox2.Size = UDim2.new(0,35,0,20)
 	moveBox2.Position = UDim2.new(0,35,0,30) -- Um 35 nach rechts verschoben
 	moveBox2.Text = "5"
 
 	local glideBtn2 = Instance.new("TextButton")
 	glideBtn2.Parent = mainFrame
-	glideBtn2.Size = UDim2.new(0,75,0,30)
+	glideBtn2.Size = UDim2.new(0,75,0,20)
 	glideBtn2.Position = UDim2.new(0,70,0,30) -- Position angepasst
 	glideBtn2.Text = "Glide2"
 
