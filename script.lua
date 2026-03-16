@@ -134,13 +134,13 @@ button.MouseButton1Click:Connect(function()
 	local moveBox2 = Instance.new("TextBox")
 	moveBox2.Parent = mainFrame
 	moveBox2.Size = UDim2.new(0,35,0,20)
-	moveBox2.Position = UDim2.new(0,35,0,20) -- Um 35 nach rechts verschoben
+	moveBox2.Position = UDim2.new(0,35,0,19) -- Um 35 nach rechts verschoben
 	moveBox2.Text = "5"
 
 	local glideBtn2 = Instance.new("TextButton")
 	glideBtn2.Parent = mainFrame
 	glideBtn2.Size = UDim2.new(0,75,0,20)
-	glideBtn2.Position = UDim2.new(0,70,0,20) -- Position angepasst
+	glideBtn2.Position = UDim2.new(0,70,0,19) -- Position angepasst
 	glideBtn2.Text = "Glide2"
 
 	glideBtn1.MouseButton1Click:Connect(function()
