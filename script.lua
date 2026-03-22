@@ -30,7 +30,7 @@ button.MouseButton1Click:Connect(function()
 
 	gui:Destroy()
 
-	-- Intro Screen
+	-- Intro
 	local intro = Instance.new("ScreenGui")
 	intro.Parent = game.CoreGui
 
@@ -44,7 +44,6 @@ button.MouseButton1Click:Connect(function()
 	text.TextColor3 = Color3.fromRGB(255,255,255)
 
 	task.wait(2)
-
 	intro:Destroy()
 
 	-- Script Start
@@ -52,7 +51,7 @@ button.MouseButton1Click:Connect(function()
 	local char
 	local root
 	local vim = game:GetService("VirtualInputManager")
-	local UIS = game:GetService("UserInputService") -- Service für Dragging hinzugefügt
+	local UIS = game:GetService("UserInputService")
 
 	local function updateChar(c)
 		char = c
@@ -74,17 +73,15 @@ button.MouseButton1Click:Connect(function()
 	mainFrame.BackgroundTransparency = 1
 	mainFrame.Active = true
 
-	-- === Drag Box (Die leere Box zum Verschieben links daneben) ===
+	-- Drag Box
 	local dragBox = Instance.new("TextButton")
-	dragBox.Name = "DragBox"
 	dragBox.Parent = mainFrame
-	dragBox.Size = UDim2.new(0,35,0,40) -- Volle Höhe des GUIs
+	dragBox.Size = UDim2.new(0,35,0,40)
 	dragBox.Position = UDim2.new(0,0,0,0)
-	dragBox.Text = "" -- Leer lassen
-	dragBox.BackgroundColor3 = Color3.fromRGB(50, 50, 50) 
-	dragBox.BackgroundTransparency = 0.5 -- Halbtransparent, damit man sie sieht
+	dragBox.Text = ""
+	dragBox.BackgroundColor3 = Color3.fromRGB(50,50,50)
+	dragBox.BackgroundTransparency = 0.5
 
-	-- Drag-Funktionalität
 	local dragging, dragInput, dragStart, startPos
 
 	local function update(input)
@@ -93,7 +90,7 @@ button.MouseButton1Click:Connect(function()
 	end
 
 	dragBox.InputBegan:Connect(function(input)
-		if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+		if input.UserInputType == Enum.UserInputType.MouseButton1 then
 			dragging = true
 			dragStart = input.Position
 			startPos = mainFrame.Position
@@ -107,7 +104,7 @@ button.MouseButton1Click:Connect(function()
 	end)
 
 	dragBox.InputChanged:Connect(function(input)
-		if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
+		if input.UserInputType == Enum.UserInputType.MouseMovement then
 			dragInput = input
 		end
 	end)
@@ -117,33 +114,34 @@ button.MouseButton1Click:Connect(function()
 			update(input)
 		end
 	end)
-	-- =============================================================
 
+	-- UI
 	local moveBox1 = Instance.new("TextBox")
 	moveBox1.Parent = mainFrame
 	moveBox1.Size = UDim2.new(0,35,0,20)
-	moveBox1.Position = UDim2.new(0,35,0,0) -- Um 35 nach rechts verschoben wegen DragBox
+	moveBox1.Position = UDim2.new(0,35,0,0)
 	moveBox1.Text = "5"
 
 	local glideBtn1 = Instance.new("TextButton")
 	glideBtn1.Parent = mainFrame
 	glideBtn1.Size = UDim2.new(0,75,0,20)
-	glideBtn1.Position = UDim2.new(0,70,0,0) -- Position angepasst
+	glideBtn1.Position = UDim2.new(0,70,0,0)
 	glideBtn1.Text = "Glide1"
 
 	local moveBox2 = Instance.new("TextBox")
 	moveBox2.Parent = mainFrame
 	moveBox2.Size = UDim2.new(0,35,0,20)
-	moveBox2.Position = UDim2.new(0,35,0,19) -- Um 35 nach rechts verschoben
+	moveBox2.Position = UDim2.new(0,35,0,19)
 	moveBox2.Text = "5"
 
 	local glideBtn2 = Instance.new("TextButton")
 	glideBtn2.Parent = mainFrame
 	glideBtn2.Size = UDim2.new(0,75,0,20)
-	glideBtn2.Position = UDim2.new(0,70,0,19) -- Position angepasst
+	glideBtn2.Position = UDim2.new(0,70,0,19)
 	glideBtn2.Text = "Glide2"
 
-	glideBtn1.MouseButton1Click:Connect(function()
+	-- FUNCTIONS
+	local function glide1()
 		if root then
 			vim:SendKeyEvent(true,"Three",false,game)
 			vim:SendKeyEvent(false,"Three",false,game)
@@ -151,9 +149,9 @@ button.MouseButton1Click:Connect(function()
 			local amt = tonumber(moveBox1.Text) or 5
 			root.CFrame = root.CFrame * CFrame.new(0,0,-amt)
 		end
-	end)
+	end
 
-	glideBtn2.MouseButton1Click:Connect(function()
+	local function glide2()
 		if root then
 			local amt = tonumber(moveBox2.Text) or 5
 			root.CFrame = root.CFrame * CFrame.new(0,0,amt)
@@ -161,5 +159,21 @@ button.MouseButton1Click:Connect(function()
 			vim:SendKeyEvent(true,"Q",false,game)
 			vim:SendKeyEvent(false,"Q",false,game)
 		end
+	end
+
+	-- BUTTONS
+	glideBtn1.MouseButton1Click:Connect(glide1)
+	glideBtn2.MouseButton1Click:Connect(glide2)
+
+	-- KEYBINDS (DAS WOLLTEST DU)
+	UIS.InputBegan:Connect(function(input, gameProcessed)
+		if gameProcessed then return end
+
+		if input.KeyCode == Enum.KeyCode.X then
+			glide1()
+		elseif input.KeyCode == Enum.KeyCode.Z then
+			glide2()
+		end
 	end)
+
 end)
